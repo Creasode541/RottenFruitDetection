@@ -16,7 +16,7 @@ header {
 
 .nav {
     background-color: #333;
-    overflow: hidden;
+    height: 35px;
     position: relative;
 }
 
@@ -43,12 +43,66 @@ header {
 .nav .icon {
     display: none;
 }
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+.dropdown .dropbtn:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #4d4d4d;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+  
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+  
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+}
+  
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
         
 /* ---------------------------------Container styles---------------------------------------------- */
 .container {
     max-width: 70%;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
+    min-height: 100vh;
 }
         
 /* --------------------------------Main content styles--------------------------------------------- */
@@ -57,6 +111,7 @@ header {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
 }
 
 /* Detector */
@@ -145,7 +200,7 @@ header {
     margin: 10px;
     display: flex;
     align-items: center;
-    /*justify-content: center;*/
+    
 }
 
 .pic {
@@ -167,8 +222,11 @@ img {
 footer {
     background-color: #333;
     color: #fff;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
+    bottom: 0;
+    position: relative;
+    width: 100%;
 }
         
 /* -------------------------------------Responsive styles--------------------------------------- */
@@ -188,21 +246,55 @@ footer {
     }
 
     .nav a.icon {
-    float: right;
-    display: block;
+        float: right;
+        display: block;
+        
     }
     .nav.responsive {
         position: relative;
+        z-index: 1;
     }
 
     .nav.responsive a.icon {
-      position: absolute;
-      right: 0;
-      top: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
     .nav.responsive a {
-      float: none;
-      display: block;
-      text-align: left;
+        float: none;
+        display: block;
+        text-align: left;
+        background-color: #4d4d4d;
+    }
+    .nav.responsive a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .nav .dropdown:not(:first-child) {
+        display: none;
+    }
+    .nav.responsive .dropdown{
+        float: none;
+        display: block;
+        text-align: left;
+        background-color: #4d4d4d;
+        
+    }
+    .nav.responsive .dropdown .dropbtn {
+        width: 100%;
+        text-align: left;
+    }
+    .nav.responsive .dropdown .dropdown-content {
+        width: 50%;
+        background-color: #333;
+    }
+    .nav.responsive .dropdown-content a:hover {
+        background-color: #ddd;
+        
+    }
+    .nav.responsive .dropdown .dropbtn:hover {
+        background-color: #ddd;
+        color: black;
     }
 }
