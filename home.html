@@ -18,7 +18,14 @@
                 x.className = "nav";
             }
         }
+
     </script>
+    <style>
+        body {
+          background-image: url('images/bg2.jpg');
+          background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,7 +33,17 @@
         <h1>Rotten Fruit Detection</h1>
         <div class="nav" id="mobilenav">
             <a href="home.html" class="active">Home</a>
-            <a href="detector.html">Detector</a>
+            <!--<a href="detector.html" class="active">Detector</a>-->
+            <div class="dropdown">
+                <button class="dropbtn">Detector
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="detectstraw.html">Strawberry</a>
+                    <a href="detectpea.html">Peach</a>
+                    <a href="detectpom.html">Pomegranate</a>
+                </div>
+            </div>
             <a href="about.html">About Us</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
@@ -52,9 +69,13 @@
             <p>RottenFruitDetection represents a significant advancement in the field of food technology, offering a reliable and efficient solution for assessing fruit quality. By harnessing the power of machine learning, this innovative program empowers stakeholders across the supply chain to make informed decisions, minimize waste, and uphold food safety standards.</p>
         </div>
     </div>
-
     <footer>
         <p>&copy RottenFruitDetection</p>
     </footer>
+    
+</body>
+
+</html>
+
 </body>
 </html>
