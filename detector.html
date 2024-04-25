@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fruit Detection</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to submit form data to Python file
+            document.getElementById("form-id").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                const selectedFruit = document.getElementById("fruitSelection").value;
+                const selectedFile = document.getElementById("files").files[0];
+    
+                // Add fruit and image data to form data
+                formData.append("selectedFruit", selectedFruit);
+                formData.append("file", selectedFile);
+    
+                // Send form data to Python file using fetch API
+                fetch('http://127.0.0.1:5000/run_model', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    // Display result on the page
+                    document.getElementById("result").innerText = "Result: " + data.class;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
+
+            // Function to display the uploaded image
+            document.getElementById("files").addEventListener("change", function() {
+                const files = this.files;
+                const gallery = document.getElementById("gallery");
+                gallery.innerHTML = ""; // Clear existing images
+
+                // Display each selected image
+                for (const file of files) {
+                    const imgContainer = document.createElement("div");
+                    imgContainer.classList.add("image-container");
+                    const img = document.createElement("img");
+                    img.src = URL.createObjectURL(file);
+                    imgContainer.appendChild(img);
+                    gallery.appendChild(imgContainer);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Rotten Fruit Detection</h1>
+        <div class="nav" id="mobilenav">
+            <a href="home.html">Home</a>
+            <a href="detector.html" class="active">Detector</a>
+            <a href="about.html">About Us</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Detection Content</h2>
+            <h2><center>Detect Rotten Fruit</center></h2>
+            <br>
+                <p><font color="black"><center>Please fill out the following fields to run the detection model on your fruit image.</center></font></p>
+                <br>
+                <center>
+                <br>
+            
+                <!-- DATA FIELDS -->
+                <form method="post" action="" id="form-id" enctype="multipart/form-data">
+                    <label for="fruitSelection">Select Fruit:</label><br>
+                    <select id="fruitSelection" name="fruitSelection">
+                        <option value="strawberry">Strawberry</option>
+                        <option value="peach">Peach</option>
+                        <option value="pomegrante">Pomegranate</option>
+                    </select><br><br>
+
+                    <!-- Input field to store the selected fruit -->
+                    <input type="hidden" id="selectedFruit" name="selectedFruit">
+                         
+                    <!-- Drag and Drop Form -->
+                    <div id="drop-zone">
+                        <center>
+                            <p>Drag and Drop or Select File to Upload</p><br>
+                            <input type="file" id="files" name="files[]" accept=".jpg, .jpeg, .png, .gif" multiple="multiple" max_file_uploads="100"><br>
+                            <div id="gallery"></div><br>
+                        </center>
+                    </div>
+                       
+                    <button type="submit" name="submit" id="submit-btn" class="button" style="font-family: 'Times New Roman',Times, serif;">Run Detection</button></center>
+                </form>
+                <br><br><br>
+                <center><p id="result"></p>
+                </center>
+            <p></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy RottenFruitDetection</p>
+    </footer>
+</body>
+</html>
