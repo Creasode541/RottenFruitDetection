@@ -61,6 +61,12 @@ def run_model():
     # Define class labels
     class_labels = ['Not Rotten', 'Rotten']
 
+    # Adding disclaimer for if fruit is rotten
+    result_message = class_labels[predicted_class]
+    if result_message == 'Rotten':
+        result_message += "Disclaimer: The classification provided by this software is intended as a recommendation based on image analysis and machine learning algorithms. Consuming fruit that is visually classified as 'Not Rotten' by this software does not guarantee its freshness or safety for consumption. Users are advised to exercise caution and use their own judgment when consuming any food item, as eating fruit that is rotten can pose health risks and may lead to adverse health effects."
+
+
     # Send result back to client
     result = {
         "class": class_labels[predicted_class]
